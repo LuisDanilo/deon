@@ -1,4 +1,4 @@
-@import './assets/vars.scss';
+@import './assets/scss/vars.scss';
 
 .App {
   height: 100%;
@@ -104,5 +104,42 @@
 
 @font-face{ 
   font-family: 'Cartoon';
-  src: url('./assets/from-cartoon-blocks.TTF');
+  src: url('./assets/fonts/from-cartoon-blocks.TTF');
 }
+
+/* Card.jsx */
+.card:before {
+  content: '';
+  padding-top: 150%;
+}
+
+$cardPadding: 10%;
+
+.card {
+  position: relative;
+  padding: $cardPadding;
+}
+
+.card img {
+  position: absolute;
+  width: (100% - 2 * $cardPadding);
+  height: (100% - 2 * $cardPadding);
+}
+
+/* Score.jsx */
+
+.score-container {
+  width: 100%
+}
+
+.circle {
+  border: 1px solid #fff;
+}
+
+.circle:before {
+  content: '';
+  padding-top: 100%;
+  float: left;
+}
+
+

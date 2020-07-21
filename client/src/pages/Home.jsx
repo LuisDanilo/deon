@@ -12,6 +12,10 @@ class Home extends Component {
       start: false,
       loading: true
     }
+    /* this.state = {
+      start: true,
+      loading: false
+    } */
   }
 
   hideProgressBar = () => {

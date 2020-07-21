@@ -1,8 +1,9 @@
 $progressBarDuration: 5s;
 $hideProgressBar: 1.5s;
 $progressBar: $progressBarDuration + $hideProgressBar;
-$titleFadeInDuration: 1.5s;
+$titleFadeInDuration: 2s;
 $titleFadeOutDuration: 1.5s;
+$cardsFadeInDuration: 2s;
 
 :export {
   progressBar: $progressBar;
