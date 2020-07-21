@@ -1,25 +1,32 @@
 import React, {Component} from 'react'
+import Loading from '../components/Loading'
+import Title from '../components/Title'
+import Cards from '../components/Cards'
+
 
 class Home extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      start: false,
+      loading: true
+    }
+  }
+
+  hideProgressBar = () => {
+    this.setState({loading: false})
+  }
+
   start = () => {
-    alert('Start!')
+    this.setState({start: true})
   }
 
   render() {
     return (
-      <div className="demo">
-        <div className="content">
-            <div id="large-header" className="large-header">
-              <canvas id="demo-canvas"></canvas>
-              <div className="title-container">
-                <h1 className="main-title">
-                  <span id="start" onClick={this.start}>D</span>
-                  <span className="thin">eon</span>
-                </h1>
-              </div>
-            </div>
-        </div>
+      <div className="container-fluid d-flex justify-content-center align-items-center">
+        { this.state.loading ? <Loading didMount={this.hideProgressBar}/> : 
+          this.state.start ? <Cards/> : <Title onStart={this.start}/>}
       </div>
     )
   }

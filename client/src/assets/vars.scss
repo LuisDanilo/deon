@@ -1,0 +1,10 @@
+$progressBarDuration: 5s;
+$hideProgressBar: 1.5s;
+$progressBar: $progressBarDuration + $hideProgressBar;
+$titleFadeInDuration: 1.5s;
+$titleFadeOutDuration: 1.5s;
+
+:export {
+  progressBar: $progressBar;
+  fadeOut: $titleFadeOutDuration;
+}
