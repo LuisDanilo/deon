@@ -109,21 +109,103 @@
 
 /* Cards.jsx */
 .cards-container {
-  animation: fadein $cardsFadeInDuration forwards
+  animation: fadein $cardsFadeInDuration forwards;
+  overflow: hidden;
+}
+
+.expandChild .card-container:not(.grow){
+  visibility: hidden;
+  display: none;
+  opacity: 0;
+}
+
+.expandChild .card-container.grow {
+  flex-basis: 100%;
 }
 
 /* Card.jsx */
+
+/* ----------------------------------------------------------------------------- */
+
 .card-container {
   position: relative;
+  flex: 0 0 50%;
+  transition-property: visibility, opacity, flex-basis;
+  transition-duration: $flipAndGrowDuration;
 }
 
-$cardPadding: 10%;
+.card {
+  position: relative;
+  background-color: $colorDark;
+  border: 1px solid white;
+  border-radius: 15%;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  transition-property: opacity, transform;
+  transition-duration: $flipAndGrowDuration;
+}
+
+.card:before {
+  content: '';
+  padding-top: 150%;
+}
+
+.card > * {
+  position: absolute;
+  filter: invert(1);
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+}
+
+.front {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
+
+.back {
+  position: absolute;
+  opacity: 0;
+  transform: rotateY(180deg);
+}
+
+.flipToBack {
+  & .front {
+    opacity: 0;
+    transform: rotateY(180deg)
+  }
+
+  & .back {
+    opacity: 1;
+    transform: rotateY(0deg)
+  }
+}
+
+.flipToFront {
+  & .front {
+    opacity: 1;
+    transform: rotateY(0deg)
+  }
+
+  & .back {
+    opacity: 0;
+    transform: rotateY(180deg)
+  }
+}
+/*
+
+
+
 
 .card-container .card {
   padding: $cardPadding;
   background-color: $colorDark;
   border: 1px solid white;
   border-radius: 15%;
+  width: 100%;
   transition-property: opacity, transform;
   transition-duration: $flipAndGrowDuration;
 }
@@ -140,9 +222,7 @@ $cardPadding: 10%;
 
 .back {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  width: 50%;
   opacity: 0;
   transform: rotateY(180deg);
 }
@@ -177,11 +257,9 @@ $cardPadding: 10%;
   height: (100% - 2 * $cardPadding);
   filter: invert(1);
 }
+*/
 
-/* .flipAndGrow {
-  animation: flipandgrow $flipAndGrowDuration forwards
-} */
-
+/* ----------------------------------------------------------------------------- */
 
 /* Score.jsx */
 
