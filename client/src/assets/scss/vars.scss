@@ -4,6 +4,7 @@ $progressBar: $progressBarDuration + $hideProgressBar;
 $titleFadeInDuration: 2s;
 $titleFadeOutDuration: 1.5s;
 $cardsFadeInDuration: 2s;
+$colorDark: #050505;
 
 :export {
   progressBar: $progressBar;
