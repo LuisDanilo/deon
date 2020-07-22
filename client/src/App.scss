@@ -113,27 +113,75 @@
 }
 
 /* Card.jsx */
+.card-container {
+  position: relative;
+}
+
+$cardPadding: 10%;
+
+.card-container .card {
+  padding: $cardPadding;
+  background-color: $colorDark;
+  border: 1px solid white;
+  border-radius: 15%;
+  transition-property: opacity, transform;
+  transition-duration: $flipAndGrowDuration;
+}
+
 .card:before {
   content: '';
   padding-top: 150%;
 }
 
-$cardPadding: 10%;
+.front {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
 
-.card {
-  position: relative;
-  padding: $cardPadding;
-  background-color: $colorDark;
-  border: 1px solid white;
-  border-radius: 15%;
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: rotateY(180deg);
+}
+
+.flipToBack {
+  & .front {
+    opacity: 0;
+    transform: rotateY(180deg)
+  }
+
+  & .back {
+    opacity: 1;
+    transform: rotateY(0deg)
+  }
+}
+
+.flipToFront {
+  & .front {
+    opacity: 1;
+    transform: rotateY(0deg)
+  }
+
+  & .back {
+    opacity: 0;
+    transform: rotateY(180deg)
+  }
 }
 
 .card img {
   position: absolute;
   width: (100% - 2 * $cardPadding);
   height: (100% - 2 * $cardPadding);
-  filter: invert(1)
+  filter: invert(1);
 }
+
+/* .flipAndGrow {
+  animation: flipandgrow $flipAndGrowDuration forwards
+} */
+
 
 /* Score.jsx */
 
@@ -151,4 +199,7 @@ $cardPadding: 10%;
   float: left;
 }
 
-
+/* clase de prueba */
+.blur {
+  filter: blur(1px)
+}
