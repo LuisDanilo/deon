@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import cssVars from '../assets/scss/vars.scss'
+import cssVars from '../../assets/scss/vars.scss'
 
 class Loading extends Component {
 

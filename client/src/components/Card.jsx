@@ -26,7 +26,7 @@ class Card extends Component {
 
   render() {
     return (
-      <div className="my-3 card-container" onClick={this.toggleCard} ref={element => this.card = element}>
+      <div className="card-container" onClick={this.toggleCard} ref={element => this.card = element}>
         <div className="card front">
           <img className='' src={image} alt="A misterious card"/>
         </div>

@@ -42,6 +42,10 @@ class Cards extends Component {
       xl: false,
       answered: 0
     }
+    this.cards = [
+      <Card/>, <Card/>, <Card/>, <Card/>, <Card/>, <Card/>,
+      <Card/>, <Card/>, <Card/>, <Card/>, <Card/>, <Card/>
+    ]
   }
   resize = () => {
     let w = window.innerWidth
@@ -50,7 +54,6 @@ class Cards extends Component {
     else if (992 <= w && w <= 1199) this.setState({ sm: false, md: false, lg: true, xl: false })
     else if (w >= 1200) this.setState({ sm: false, md: false, lg: false, xl: true })
     else this.setState({ sm: true, md: false, lg: false, xl: false })
-    console.log(this.state)
   }
 
   componentDidMount = () => {
