@@ -1,21 +1,21 @@
 import React, {Component} from 'react'
 import Loading from '../../components/Loading/Loading'
 import Title from '../../components/Title/Title'
-import Cards from '../../components/Cards'
+import Cards from '../../components/Cards/Cards'
 
 
 class Home extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
+/*     this.state = {
       start: false,
       loading: true
-    }
-/*     this.state = {
+    } */
+    this.state = {
       start: true,
       loading: false
-    } */
+    }
   }
 
   hideProgressBar = () => {

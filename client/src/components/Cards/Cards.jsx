@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Card from './Card'
+import Card from '../Card'
 //import Score from './Score'
 
 class CardsSm extends Component {
@@ -58,6 +58,7 @@ class Cards extends Component {
 
   componentDidMount = () => {
     window.addEventListener("resize", this.resize)
+    this.resize()
   }
 
   componentWillUnmount = () => {
@@ -66,12 +67,10 @@ class Cards extends Component {
 
   render() {
     return (
-      <div className="container d-flex justify-content-center flex-column align-content-center cards-container">
-        {/* <Score/> */}
-        {/* Para pantallas por debajo de sm se muestran dos tarjetas por columna */}
-        {/* A partir de pantallas md se desea mostrar tres tarjetas por columna */}
-        {this.state.sm ? <CardsSm /> : <CardsSm />}
-      </div>
+      this.state.sm ? <h1>Soy sm</h1> :
+      this.state.md ? <h1>Soy md</h1> :
+      this.state.lg ? <h1>Soy lg</h1> :
+      this.state.xl ? <h1>Soy xl</h1> : <h1>Soy default</h1>
     )
   }
 }

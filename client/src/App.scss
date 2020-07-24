@@ -2,34 +2,11 @@
 @import './components/Loading/loading.scss';
 @import './components/Title/title.scss';
 @import './pages/Home/home.scss';
+@import './components/Cards/cards.scss';
 
 .App {
   height: 100%;
 }
-
-/* Home.jsx */
-
-
-/* Title.jsx */
-
-
-/* Cards.jsx */
-.cards-container {
-  animation: fadein $cardsFadeInDuration forwards;
-  overflow: hidden;
-}
-
-.expandChild .card-container:not(.grow){
-  visibility: hidden;
-  display: none;
-  opacity: 0;
-}
-
-.expandChild .card-container.grow {
-  flex-basis: 100%;
-}
-
-/* Card.jsx */
 
 /* ----------------------------------------------------------------------------- */
 
@@ -166,24 +143,3 @@
 */
 
 /* ----------------------------------------------------------------------------- */
-
-/* Score.jsx */
-
-.score-container {
-  width: 100%
-}
-
-.circle {
-  border: 1px solid #fff;
-}
-
-.circle:before {
-  content: '';
-  padding-top: 100%;
-  float: left;
-}
-
-/* clase de prueba */
-.blur {
-  filter: blur(1px)
-}
