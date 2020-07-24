@@ -1,0 +1,50 @@
+@import '../../assets/scss/vars.scss';
+
+.btnStart {
+  cursor: pointer
+}
+
+.noSelection {
+  user-select: none
+}
+
+.fadeOut {
+  animation: fadeout $titleFadeOutDuration forwards
+}
+
+.fadeIn {
+  animation: fadein $titleFadeInDuration forwards
+}
+
+.cartoon {
+  font-family: 'Cartoon';
+  font-size: 8rem;
+  color: white;
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1
+  }
+  100% {
+    color: lime;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@font-face{ 
+  font-family: 'Cartoon';
+  src: url('../../assets/fonts/from-cartoon-blocks.TTF');
+}

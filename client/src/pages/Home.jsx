@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Loading from '../components/Loading/Loading'
-import Title from '../components/Title'
+import Title from '../components/Title/Title'
 import Cards from '../components/Cards'
 
 
