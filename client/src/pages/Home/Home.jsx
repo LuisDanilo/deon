@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import Loading from '../components/Loading/Loading'
-import Title from '../components/Title/Title'
-import Cards from '../components/Cards'
+import Loading from '../../components/Loading/Loading'
+import Title from '../../components/Title/Title'
+import Cards from '../../components/Cards'
 
 
 class Home extends Component {
@@ -28,7 +28,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="container-fluid d-flex justify-content-center align-items-center">
+      <div className="container-fluid">
         { this.state.loading ? <Loading didMount={this.hideProgressBar}/> : 
           this.state.start ? <Cards/> : <Title onStart={this.start}/>}
       </div>
