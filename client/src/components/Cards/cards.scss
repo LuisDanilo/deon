@@ -1,16 +1,26 @@
 @import '../../assets/scss/vars.scss';
 
+.score-cards-container {
+  flex-direction: column;
+}
+
 .cards-container {
+  display: grid;
   animation: fadein $cardsFadeInDuration forwards;
-  overflow: hidden;
+  &.grid-sm {
+    grid-template-columns: repeat($gridColsSm, 1fr);
+    grid-template-rows: repeat($gridRowsSmMd, 1fr);
+  }
+  &.grid-md {
+    grid-template-columns: repeat($gridColsMd, 1fr);
+    grid-template-rows: repeat($gridRowsSmMd, 1fr);
+  }
+  &.grid-lg, &.grid-xl {
+    grid-template-columns: repeat($gridColsLgXl, 1fr);
+    grid-template-rows: repeat($gridRowsLgXl, 1fr);
+  }
 }
 
-.expandChild .card-container:not(.grow){
-  visibility: hidden;
-  display: none;
-  opacity: 0;
-}
-
-.expandChild .card-container.grow {
-  flex-basis: 100%;
+h1 {
+  color: white
 }
