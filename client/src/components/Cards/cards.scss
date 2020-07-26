@@ -21,6 +21,25 @@
   }
 }
 
-h1 {
-  color: white
+/* Código de colores pantalla
+  verde: sm
+  amarillo: md
+  rojo: lg
+  morado: xl
+*/
+
+.sm {
+  color: lime;
+}
+
+.md {
+  color: yellow;
+}
+
+.lg {
+  color: red;
+}
+
+.xl {
+  color: purple;
 }

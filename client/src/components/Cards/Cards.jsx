@@ -1,37 +1,7 @@
 import React, { Component } from 'react'
-import Card from '../Card'
+import Card from '../Card/Card'
 //import Score from './Score'
 import cssVars from '../../assets/scss/vars.scss';
-
-class CardsSm extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      expanded: false
-    }
-  }
-
-  expandCard = () => {
-    this.setState({expanded: true})
-    this.row.classList.add('expandChild')
-  }
-
-  shrinkCard = () => {
-    this.setState({expanded: false})
-    this.row.classList.remove('expandChild')
-  }
-
-  render() {
-    return (
-      <div className="row" ref={element => this.row = element}>
-        <Card onFlipToFront={this.expandCard} onFlipToBack={this.shrinkCard}/>
-        <Card onFlipToFront={this.expandCard} onFlipToBack={this.shrinkCard}/>
-        <Card onFlipToFront={this.expandCard} onFlipToBack={this.shrinkCard}/>
-        <Card onFlipToFront={this.expandCard} onFlipToBack={this.shrinkCard}/>
-      </div>
-    )
-  }
-}
 class Cards extends Component {
 
   constructor(props) {
@@ -42,11 +12,13 @@ class Cards extends Component {
       lg: false,
       xl: false,
       answered: 0,
-      repeatCards: 3,
+      rendered: 4,
       gridCols: 2,
-      gridRows: 2
+      gridRows: 2,
+      repeatCards: false
     }
     this.nCards = Number(cssVars.nCards)
+    this.cards = []
   }
   resize = () => {
     // Obtén ancho viewport
@@ -62,32 +34,51 @@ class Cards extends Component {
     let gridCols = sm ? cssVars.gridColsSm :
                    md ? cssVars.gridColsMd :
                    lg || xl ? cssVars.gridColsLgXl : cssVars.gridColsSm
-    // Define según la pantalla cuantas veces se repite un set de cartas
-    let repeatCards = this.nCards / (gridCols * gridRows)
+    // Define según la pantalla cuantas veces se repite un set de cartas de gridRows x gridCols
+    //let repeatCards = this.nCards / (gridCols * gridRows) > 1
     // Añade la clase respectiva al contenedor de cartas
     let grid = sm ? 'grid-sm' :
                md ? 'grid-md' :
                lg ? 'grid-lg' :
                xl ? 'grid-xl' : 'grid-sm'
+    let screen = sm ? 'sm' :
+                 md ? 'md' :
+                 lg ? 'lg' :
+                 xl ? 'xl' : 'sm'
     this.cardsContainer.classList.remove('grid-sm', 'grid-md', 'grid-lg', 'grid-xl')
     this.cardsContainer.classList.add(grid)
+    // DEBUG: Añadir color al score para saber que tipo de pantalla es
+    this.score.classList.remove('sm', 'md', 'lg', 'xl')
+    this.score.classList.add(screen)
     // Actualiza estado
-    this.setState({sm, md, lg, xl, repeatCards, gridRows, gridCols})
+    this.setState({sm, md, lg, xl, gridRows, gridCols, rendered: gridRows * gridCols, repeatCards: false})
   }
 
   componentDidMount = () => {
     window.addEventListener("resize", this.resize)
     this.resize()
+    // Obtener tarjetas
+    let {gridCols, gridRows} = this.state
+    for (let i = 0; i < gridCols * gridRows; i++) {
+      //cards.push(<button key={i} className='btn btn-info' onClick={this.cardAnswered}>Responder tarjeta</button>)
+      this.cards.push(<Card key={i} cardId={i} onAnswer={this.cardAnswered} renderAgain={this.state.repeatCards}/>)
+    }
   }
 
   componentWillUnmount = () => {
     window.removeEventListener("resize", this.resize)
   }
 
-  cardAnswered = (e) => {
-    let answered = this.state.answered + 1
-    e.target.classList.add('disabled')
-    this.setState({answered})
+  cardAnswered = () => {
+    console.log('Tarjeta respondida')
+    let {answered, rendered} = this.state
+    answered = answered + 1
+    console.log(`Respondidas: ${answered}`)
+    let repeatCards = rendered < this.nCards
+    console.log(`Debo repetir el renderizado de la tarjeta? ${repeatCards}`)
+    rendered = rendered + 1
+    console.log(`Por tanto el contador de tarjetas renderizadas va en ${rendered}`)
+    this.setState({answered, rendered, repeatCards})
   }
 
   render() {
@@ -98,20 +89,16 @@ class Cards extends Component {
                   xl ? `Soy xl, (${gridRows}x${gridCols})x${repeatCards}` :
                   `Soy default, repito: ${repeatCards}` */
                   
-    let {gridCols, gridRows, answered} = this.state
+    let {answered} = this.state
     // Renderizar tarjetas si aun hay taretas por responder
-    let renderCards = (answered !== this.nCards)
-    console.log(`Respondidas: ${answered}, Total: ${this.nCards}, render?: ${renderCards}`)
-    // Obtener tarjetas
-    let cards = []
-    for (let i = 0; i < gridCols * gridRows; i++) {
-      cards.push(<button key={i} className='btn btn-info' onClick={this.cardAnswered}>Responder tarjeta</button>)
-    }
+    let showFinalScore = (answered !== this.nCards)
+    console.log(`Respondidas: ${answered}, Total: ${this.nCards}, Faltan por responder?: ${showFinalScore}, Tarjetas renderizadas: ${this.state.rendered}`)
+    
     return (
       <div className="score-cards-container">
-        <h1>Score = {this.state.answered}</h1>
+        <h1 ref={element => this.score = element}>Score = {this.state.answered}</h1>
         <div className="cards-container" ref={element => this.cardsContainer = element}>
-          {renderCards ? cards.map(card => card) : <h2>Ya es toda we</h2> }
+          {showFinalScore ? this.cards.map(card => card) : <h2>Ya es toda we</h2> }
         </div>
       </div>
       

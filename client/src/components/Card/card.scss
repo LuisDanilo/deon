@@ -1,0 +1,106 @@
+@import '../../assets/scss/vars.scss';
+
+.card-container {
+  padding: 0.5rem;
+}
+
+.fadeIn {
+  animation: fadein $cardFadeInDuration $cardFadeOutDuration forwards;
+}
+
+.fadeOut {
+  animation: fadeout $cardFadeOutDuration forwards
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/*
+.card-container {
+  position: relative;
+  flex: 0 0 50%;
+  transition-property: visibility, opacity, flex-basis;
+  transition-duration: $flipAndGrowDuration;
+}
+
+.card {
+  position: relative;
+  background-color: $colorDark;
+  border: 1px solid white;
+  border-radius: 15%;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  transition-property: opacity, transform;
+  transition-duration: $flipAndGrowDuration;
+}
+
+.card:before {
+  content: '';
+  padding-top: 150%;
+}
+
+.card > * {
+  position: absolute;
+  filter: invert(1);
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+}
+
+.front {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
+
+.back {
+  position: absolute;
+  opacity: 0;
+  transform: rotateY(180deg);
+}
+
+.flipToBack {
+  & .front {
+    opacity: 0;
+    transform: rotateY(180deg)
+  }
+
+  & .back {
+    opacity: 1;
+    transform: rotateY(0deg)
+  }
+}
+
+.flipToFront {
+  & .front {
+    opacity: 1;
+    transform: rotateY(0deg)
+  }
+
+  & .back {
+    opacity: 0;
+    transform: rotateY(180deg)
+  }
+}
+*/

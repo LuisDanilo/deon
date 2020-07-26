@@ -1,9 +1,8 @@
-$bgColor: #050505;
-
-.container-fluid {
+.container-center {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: $bgColor;
+  background-color: #050505;
+  flex-direction: column;
 }
