@@ -1,18 +1,47 @@
 import React, {Component} from 'react'
-import cssVars from '../../assets/scss/vars.scss'
+import './title.scss'
 
 class Title extends Component {
 
+  constructor(props) {
+    super(props)
+    // ANIMACIONES
+    // FadeIn
+    this.fadeIn = [
+      {opacity: 0, visibility: 'hidden'},
+      {opacity: 1, visibility: 'visible'}
+    ]
+    this.fadeInOptions = {
+      duration: 1500,
+      easing: 'ease-in',
+      fill: 'forwards'
+    }
+    // FadeOut
+    this.fadeOut = [
+      {opacity: 1, visibility: 'visible'},
+      {opacity: 0, visibility: 'hidden', color: 'lime'}
+    ]
+    this.fadeOutOptions = {
+      duration: 1500,
+      easing: 'ease-out',
+      fill: 'forwards'
+    }
+  }
+
   onClick = () => {
-    this.title.classList.remove('fadeIn')
-    this.title.classList.add('fadeOut')
-    setTimeout(this.props.onStart, cssVars.fadeOut.slice(0, -1) * 1000)
+    this.title.animate(this.fadeOut, this.fadeOutOptions).onfinish = () => {
+      this.props.onStart()
+    }
+  }
+
+  componentDidMount = () => {
+    this.title.animate(this.fadeIn, this.fadeInOptions)
   }
 
   render() {
     return (
-      <h1 className='noSelection cartoon fadeIn' ref={element => this.title = element}>
-        <span className='btnStart' onClick={this.onClick}>D</span>
+      <h1 className='title' ref={element => this.title = element}>
+        <span className='btnStart' onClick={this.onClick} ref={element => this.btnStart = element}>D</span>
         <span>eon</span>
       </h1>
     )

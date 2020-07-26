@@ -11,7 +11,7 @@ class Loading extends Component {
       {width: '8%', opacity: 0},
       {width: '95%', opacity: 1},
     ]
-    this.almostDuration = {
+    this.almostLoadedOptions = {
       duration: 2500,
       fill: 'forwards',
       easing: 'ease'
@@ -20,9 +20,9 @@ class Loading extends Component {
     this.dropLoad = [
       {width: '8%'}
     ]
-    this.dropDuration = {
+    this.dropLoadOptions = {
       duration: 500,
-      delay: this.almostDuration.duration,
+      delay: this.almostLoadedOptions.duration,
       fill: 'forwards',
       easing: 'ease'
     }
@@ -30,9 +30,9 @@ class Loading extends Component {
     this.loadComplete = [
       {width: '100%'}
     ]
-    this.loadCompleteDuration = {
+    this.loadCompleteOptions = {
       duration: 250,
-      delay: this.dropDuration.duration + this.dropDuration.delay + 1750,
+      delay: this.dropLoadOptions.duration + this.dropLoadOptions.delay + 1750,
       fill: 'forwards',
       easing: 'ease-out'
     }
@@ -41,19 +41,19 @@ class Loading extends Component {
       {opacity: 1, visibility: 'visible'},
       {opacity: 0, visibility: 'hidden'}
     ]
-    this.hideProgressBarDuration = {
+    this.hideProgressBarOptions = {
       duration: 1000,
-      delay: this.loadCompleteDuration.delay + this.loadCompleteDuration.duration,
+      delay: this.loadCompleteOptions.delay + this.loadCompleteOptions.duration,
       fill: 'forwards',
       easeing: 'ease-out'
     }
   }
 
   componentDidMount = () => {
-    this.progressBar.animate(this.almostLoaded, this.almostDuration)
-    this.progressBar.animate(this.dropLoad, this.dropDuration)
-    this.progressBar.animate(this.loadComplete, this.loadCompleteDuration)
-    this.progressContainer.animate(this.hideProgressBar, this.hideProgressBarDuration).onfinish = () => {
+    this.progressBar.animate(this.almostLoaded, this.almostLoadedOptions)
+    this.progressBar.animate(this.dropLoad, this.dropLoadOptions)
+    this.progressBar.animate(this.loadComplete, this.loadCompleteOptions)
+    this.progressContainer.animate(this.hideProgressBar, this.hideProgressBarOptions).onfinish = () => {
       this.props.onLoadFinished()
     }
   }

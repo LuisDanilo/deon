@@ -1,22 +1,22 @@
 import React, {Component} from 'react'
-// Componenete a testear
-import Loading from '../../components/Loading/Loading'
-// Estilos de esta página
-import './testo.scss'
 // Indicador de pantalla
 import Screen from '../../components/Screen/Screen'
+// Estilos de esta página
+import './testo.scss'
+// Componenete a testear
+import Title from '../../components/Title/Title'
 
 class Testo extends Component {
 
   testo = () => {
-    console.log('Animaciones terminadas')
+    console.log('Inicia el juego prro')
   }
 
   render() {
     return (
       <div className="container-center">
         <Screen/>
-        <Loading onLoadFinished={this.testo}/>
+        <Title onStart={this.testo}/>
       </div>
     )
   }
