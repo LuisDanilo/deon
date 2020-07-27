@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import './card.scss'
 //import image from '../../assets/images/interrogation.svg'
 
 class Card extends Component {
@@ -53,10 +54,8 @@ class Card extends Component {
         <div className="card back"></div>
       </div>  */
     return (
-      <div className='card-container' ref={element => this.cardContainer = element}>
-        <h4>{this.state.renderAgain}</h4>
-        <button className='btn btn-success' onClick={this.answered}>Responder</button>
-        <button className='btn btn-danger'>No responder</button>
+      <div className="card-container">
+        Soy un div, ponme cuadrado o rectangular 
       </div>
     )
   }

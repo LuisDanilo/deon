@@ -17,9 +17,10 @@ class Cards extends Component {
       gridRows: 2,
       repeatCards: false
     }
-    this.nCards = Number(cssVars.nCards)
+    this.nCards = 12
     this.cards = []
   }
+
   resize = () => {
     // Obtén ancho viewport
     let w = window.innerWidth

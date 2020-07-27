@@ -4,19 +4,19 @@ import Screen from '../../components/Screen/Screen'
 // Estilos de esta página
 import './testo.scss'
 // Componenete a testear
-import Title from '../../components/Title/Title'
+import CardsRefactor from '../../components/Cards/CardsRefactor'
 
 class Testo extends Component {
 
   testo = () => {
-    console.log('Inicia el juego prro')
+    console.log('Termina el juego prro')
   }
 
   render() {
     return (
       <div className="container-center">
         <Screen/>
-        <Title onStart={this.testo}/>
+        <CardsRefactor/>
       </div>
     )
   }

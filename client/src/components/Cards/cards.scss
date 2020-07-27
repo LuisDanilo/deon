@@ -1,4 +1,62 @@
-@import '../../assets/scss/vars.scss';
+// SM
+$rowsSm: 2;
+$colsSm: 2;
+// MD
+$rowsMd: 2;
+$colsMd: 3;
+// LG and XL
+$rowsLg: 3;
+$colsLg: 4;
+
+// Exportar numero de filas y columnas a JS para generar componenetes Card
+:export {
+  // SM
+  rowsSm: $rowsSm;
+  colsSm: $colsSm;
+  // MD
+  rowsMd: $rowsMd;
+  colsMd: $colsMd;
+  // LG and XL
+  rowsLg: $rowsLg;
+  colsLg: $colsLg;
+}
+
+.cards-score-container {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  //height: 80%; // Este lo dan el alto de las tarjetas, el cual sera el 150% del ancho que les ofrezca la grilla
+  & h1, & h4 {
+    margin: 0 auto 0.5rem auto;
+  }
+}
+
+.cards-container {
+  display: grid;
+  gap: 1rem;
+  &.grid-sm {
+    grid-template-columns: repeat($colsSm, 1fr);
+    grid-template-rows: repeat($rowsSm, 1fr);
+  }
+  &.grid-md {
+    grid-template-columns: repeat($colsMd, 1fr);
+    grid-template-rows: repeat($rowsMd, 1fr);
+  }
+  &.grid-lg, &.grid-xl {
+    grid-template-columns: repeat($colsLg, 1fr);
+    grid-template-rows: repeat($rowsLg, 1fr);
+  }
+}
+
+
+
+
+
+
+
+
+
+/* @import '../../assets/scss/vars.scss';
 
 .score-cards-container {
   flex-direction: column;
@@ -26,7 +84,7 @@
   amarillo: md
   rojo: lg
   morado: xl
-*/
+
 
 .sm {
   color: lime;
@@ -42,4 +100,4 @@
 
 .xl {
   color: purple;
-}
+} */

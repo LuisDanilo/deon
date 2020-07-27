@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Loading from '../../components/Loading/Loading'
 import Title from '../../components/Title/Title'
-import Cards from '../../components/Cards/Cards'
+import CardsRefactor from '../../components/Cards/CardsRefactor'
 import './home.scss'
 
 
@@ -11,7 +11,8 @@ class Home extends Component {
     super(props)
     this.state = {
       start: false,
-      loading: true
+      loading: true,
+      end: false
     }
   }
 
@@ -23,11 +24,16 @@ class Home extends Component {
     this.setState({start: true})
   }
 
+  end = () => {
+    this.setState({start: false, end: true})
+  }
+
   render() {
     return (
       <div className="container-fluid">
         { this.state.loading ? <Loading onLoadFinished={this.loadFinished}/> : 
-          this.state.start ? <Cards/> : <Title onStart={this.start}/>}
+          this.state.start ? <CardsRefactor/> : 
+          this.state.end ? <h1>Termino el juego</h1> : <Title onStart={this.start}/>}
       </div>
     )
   }
