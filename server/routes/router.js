@@ -15,33 +15,45 @@ const db = firebaseAdmin.database()
 const router = Router()
 
 router.get('/', (req, res) => {
-  res.send('Hola mundo')
+  res.send('Aqui no hay nada que ver señores, esto es el backend >:c')
+})
+
+router.get(`/${vars.register}`, (req, res) => {
+  res.render('index', {postAnswers: vars.postAnswers, postQuestions: vars.postQuestions})
+})
+
+router.get('/api/questions', (req, res) => {
+  res.redirect(`/api/${vars.getQuestions}`)
 })
 
 // Questions
-router.get(`/api/${vars.questions}`, (req, res) => {
-  db.ref(vars.questions).once('value', snapshot => {
+router.get(`/api/${vars.getQuestions}`, (req, res) => {
+  db.ref(vars.getQuestions).once('value', snapshot => {
     let data = snapshot.val()
     res.send(data)
   })
 })
 
+router.get('/api/answers', (req, res) => {
+  res.redirect(`/api/${vars.getAnswers}`)
+})
+
 // Answers
-router.get(`/api/${vars.answers}`, (req, res) => {
-  db.ref(vars.answers).once('value', snapshot => {
+router.get(`/api/${vars.getAnswers}`, (req, res) => {
+  db.ref(vars.getAnswers).once('value', snapshot => {
     let data = snapshot.val()
     res.send(data)
   })
 })
 
 // Post para subir preguntas
-router.post('/upload-question', (req, res) => {
-
+router.post(`/${vars.postAnswers}`, (req, res) => {
+  res.send('Subir respuesta')
 })
 
 // Post para subir respuestas
-router.post('/upload-answers', (req, res) => {
-  
+router.post(`/${vars.postQuestions}`, (req, res) => {
+  res.send('Subir pregunta')
 })
 
 module.exports = router

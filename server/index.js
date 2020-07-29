@@ -8,6 +8,7 @@ const app = express()
 
 // Settings
 app.set('port', process.env.PORT || 4000)
+app.set('view engine', 'pug')
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Middleware
