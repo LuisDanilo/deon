@@ -4,7 +4,7 @@ import Screen from '../../components/Screen/Screen'
 // Estilos de esta página
 import './testo.scss'
 // Componenete a testear
-import CardsRefactor from '../../components/Cards/CardsRefactor'
+//import FatherToChildren from '../../components/FatherToChildren/FatherToChildren'
 
 class Testo extends Component {
 
@@ -16,7 +16,7 @@ class Testo extends Component {
     return (
       <div className="container-center">
         <Screen/>
-        <CardsRefactor/>
+        {/* <FatherToChildren/> */}
       </div>
     )
   }

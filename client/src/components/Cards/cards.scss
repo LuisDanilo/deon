@@ -24,29 +24,49 @@ $colsLg: 4;
 .cards-score-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 70%;
-  //height: 80%; // Este lo dan el alto de las tarjetas, el cual sera el 150% del ancho que les ofrezca la grilla
-  & h1, & h4 {
-    margin: 0 auto 0.5rem auto;
+  &.sm {
+    height: 70%;
+  }
+
+  &.md {
+    height: 80%;
+  }
+
+  &.lg, &.xl {
+    height: 90%;
+  }
+
+  & .cards-container {
+    width: 80%;
+    height: 100%;
+    display: grid;
+    gap: 1rem;
+
+    &.grid-sm {
+      grid-template-columns: repeat($colsSm, 1fr);
+      grid-template-rows: repeat($rowsSm, 1fr);
+    }
+
+    &.grid-md {
+      grid-template-columns: repeat($colsMd, 1fr);
+      grid-template-rows: repeat($rowsMd, 1fr);
+    }
+
+    &.grid-lg, &.grid-xl {
+      grid-template-columns: repeat($colsLg, 1fr);
+      grid-template-rows: repeat($rowsLg, 1fr);
+    }
+
+    &.noGrid {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+    }
   }
 }
 
-.cards-container {
-  display: grid;
-  gap: 1rem;
-  &.grid-sm {
-    grid-template-columns: repeat($colsSm, 1fr);
-    grid-template-rows: repeat($rowsSm, 1fr);
-  }
-  &.grid-md {
-    grid-template-columns: repeat($colsMd, 1fr);
-    grid-template-rows: repeat($rowsMd, 1fr);
-  }
-  &.grid-lg, &.grid-xl {
-    grid-template-columns: repeat($colsLg, 1fr);
-    grid-template-rows: repeat($rowsLg, 1fr);
-  }
-}
 
 
 

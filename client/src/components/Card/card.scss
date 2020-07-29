@@ -1,6 +1,29 @@
+@import '../../assets/scss/vars.scss';
+
 .card-container {
-  background-color: #11a6e0;
+  position: relative;
   width: 100%;
+  border-radius: 1.5rem;
+  border: 2px solid white;
+  padding: 0.5rem;
+
+  & .card {
+    border: none;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    background: $bgColor;
+    
+    &.bg {
+      filter: invert(1);
+      background: url('../../assets/images/interrogation.svg');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
 }
 
 

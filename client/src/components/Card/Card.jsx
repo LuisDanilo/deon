@@ -1,62 +1,74 @@
 import React, {Component} from 'react'
 import './card.scss'
-//import image from '../../assets/images/interrogation.svg'
+import Trivia from '../Trivia/Trivia'
 
 class Card extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      front: true,
-      renderAgain: false
+      front: true
+    }
+    // ANIMACIONES
+    // Volteo tarjeta hacia su parte trasera
+    this.flipToBack = [
+      {transform: 'rotateY(180deg)'}
+    ]
+    this.flipToBackOptions = {
+      duration: 1000,
+      easing: 'ease',
+      fill: 'forwards'
+    }
+    // Volteo tarjeta hacia su parte frontal
+    this.flipToFront = [
+      {transform: 'rotateY(0deg)'}
+    ]
+    this.flipToFrontOptions = {
+      duration: 1000,
+      easing: 'ease',
+      fill: 'forwards'
+    }
+    // Esconder contenedor (y por tanto la tarjeta en si)
+    this.hideCardContainer = [
+      {opacity: 1, visibility: 'visible'},
+      {opacity: 0, visibility: 'hidden'}
+    ]
+    this.hideCardContainerOptions = {
+      duration: 500,
+      delay: this.flipToFrontOptions.duration,
+      easing: 'ease-out',
+      fill: 'forwards'
     }
   }
 
-  toggleCard = () => {
+  flipCard = () => {
+    this.card.classList.toggle('bg')
     if (this.state.front) {
-      this.card.classList.remove('flipToFront')
-      this.card.classList.add('flipToBack', 'grow')
+      //console.log('Estoy frontal, paso a trasera')
+      this.cardContainer.animate(this.flipToBack, this.flipToBackOptions)
       this.setState({front: false})
-      this.props.onFlipToFront()
+      this.props.onFlipToBack(this.props.cardIndex)
     } else {
-      this.card.classList.remove('flipToBack', 'grow')
-      this.card.classList.add('flipToFront')
-      this.setState({front: true})
-      this.props.onFlipToBack()
+      //console.log('Estoy trasera, paso a ocultarme')
+      this.cardContainer.animate(this.flipToFront, this.flipToFrontOptions)
+      this.cardContainer.animate(this.hideCardContainer, this.hideCardContainerOptions)
+      this.props.onFlipToFront()
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextProps)
-    console.log(nextState)
-  }
-
-  componentDidMount() {
-    if (this.props.renderAgain) {
-      this.cardContainer.classList.remove('fadeOut')
-      this.cardContainer.classList.add('fadeIn')
-      this.setState({renderAgain: false})
-    }
-  }
-
-  answered = (e) => {
-    e.target.disabled = true
-    this.cardContainer.classList.remove('fadeIn')
-    this.cardContainer.classList.add('fadeOut')
-    this.props.onAnswer()
+  answer = () => {
+    this.props.onAnswerCorrect()
   }
 
   render() {
-    /* <div className="card-container" onClick={this.toggleCard} ref={element => this.card = element}>
-        <div className="card front">
-          <img className='' src={image} alt="A misterious card"/>
-        </div>
-        <div className="card back"></div>
-      </div>  */
     return (
-      <div className="card-container">
-        Soy un div, ponme cuadrado o rectangular 
-      </div>
+      <>
+        <div className="card-container" onClick={this.flipCard} ref={element => this.cardContainer = element}>
+          <div className="card bg" ref={element => this.card = element}>
+            {!this.state.front && <Trivia onAnswer={this.answer}/> }
+          </div>
+        </div>
+      </>
     )
   }
 }
