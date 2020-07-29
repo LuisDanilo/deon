@@ -28,21 +28,45 @@ router.get('/api/questions', (req, res) => {
 
 // Questions
 router.get(`/api/${vars.getQuestions}`, (req, res) => {
+  // Hacer referencia a la colección de preguntas, y tomar un snapshot
   db.ref(vars.getQuestions).once('value', snapshot => {
-    let data = snapshot.val()
-    res.send(data)
+    // Obtener toda la data del snapshot
+    let data = snapshot.exportVal()
+    // Obtener arreglo de keys (ids de las preguntas)
+    let keys = Object.keys(data)
+    // Obtener id de pregunta de forma aleatoria
+    let randomQuestionId = keys[keys.length * Math.random() << 0]
+    // Generar objeto con la pregunta y sus opciones
+    let response = {
+      questionId: randomQuestionId,
+      question: data[randomQuestionId]['question'],
+      options: data[randomQuestionId]['options'],
+      joke: data[randomQuestionId]['joke']
+    }
+    res.send(response)
   })
 })
 
-router.get('/api/answers', (req, res) => {
-  res.redirect(`/api/${vars.getAnswers}`)
+router.get('/api/answers/:id', (req, res) => {
+  res.redirect(`/api/${vars.getAnswers}/${req.params.id}`)
 })
 
 // Answers
-router.get(`/api/${vars.getAnswers}`, (req, res) => {
+router.get(`/api/${vars.getAnswers}/:id`, (req, res) => {
+  // Hacer referencia a la colección de respuestas, y tomar un snapshot
   db.ref(vars.getAnswers).once('value', snapshot => {
-    let data = snapshot.val()
-    res.send(data)
+    // Obtener toda la data del snapshot
+    let data = snapshot.exportVal()
+    // Obtener arreglo de keys (ids de las preguntas)
+    let keys = Object.keys(data)
+    // Obtener id de la respuesta requerida (que es el mismo id de la pregunta a responder)
+    let answerRequired = req.params.id
+    // Generar objeto con la respuesta (id de la respuesta, respuesta en si si es una broma)
+    let response = {
+      answerId: answerRequired,
+      answer: data[answerRequired]
+    }
+    res.send(response)
   })
 })
 
