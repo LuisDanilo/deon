@@ -139,25 +139,20 @@ class CardsRefactor extends Component {
     window.removeEventListener('resize', this.screenResized)
   }
 
-/*   componentWillUpdate() {
-    console.log(`cards vale ${JSON.stringify(this.state.cards)}`)
-    console.log(`cardsFlipped vale ${JSON.stringify(this.state.cardsFlipped)}`)
-    let mapped = this.state.cards.map((card, i) => {
-      console.log(card)
-      console.log(i)
-    })
-    console.log(`cards filtrado vale ${JSON.stringify(mapped)}`)
-  } */
-  
   render() {
     let { grow, cards, currentCard, cardsFlipped, finished } = this.state
-    let toRender = cards.map((card, i) => {
-      return cardsFlipped.includes(i) ? <div></div> : card
+    let toRender = []
+    cards.forEach((card, i ) => {
+      if (cardsFlipped.includes(i)) {
+        toRender.push(<div key={`div-${i}`}></div>)
+      } else {
+        toRender.push(card)
+      }
     })
     return (
       <div className='cards-score-container' ref={element => this.container = element}>
          {finished ? 
-            <h1>Tu puntaje: {this.state.score}</h1> :
+            <h1 className='text-white text-uppercase'>Tu puntaje: {this.state.score}</h1> :
             <div className="cards-container" ref={element => this.cardsContainer = element}>
               { grow ? cards[currentCard] : toRender}
             </div> }

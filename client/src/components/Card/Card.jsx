@@ -42,22 +42,24 @@ class Card extends Component {
   }
 
   flipCard = () => {
-    this.card.classList.toggle('bg')
     if (this.state.front) {
+      this.card.classList.toggle('bg')
       //console.log('Estoy frontal, paso a trasera')
       this.cardContainer.animate(this.flipToBack, this.flipToBackOptions)
       this.setState({front: false})
       this.props.onFlipToBack(this.props.cardIndex)
     } else {
-      //console.log('Estoy trasera, paso a ocultarme')
-      this.cardContainer.animate(this.flipToFront, this.flipToFrontOptions)
-      this.cardContainer.animate(this.hideCardContainer, this.hideCardContainerOptions)
-      this.props.onFlipToFront()
+      
     }
   }
 
-  answer = () => {
-    this.props.onAnswerCorrect()
+  answer = (correct) => {
+    //console.log('Estoy trasera, paso a ocultarme')
+    this.card.classList.toggle('bg')
+    this.cardContainer.animate(this.flipToFront, this.flipToFrontOptions)
+    this.cardContainer.animate(this.hideCardContainer, this.hideCardContainerOptions)
+    this.props.onFlipToFront()
+    if (correct) this.props.onAnswerCorrect()
   }
 
   render() {

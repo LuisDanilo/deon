@@ -1,9 +1,8 @@
 const {Router} = require('express')
 const firebaseAdmin = require('firebase-admin')
+const cors = require('cors')
 const vars = require('../assets/js/vars')
-
 let serviceAccount = require("../deon-9db24-firebase-adminsdk-f40h7-dd6ec5c39f.json");
-const { answers } = require('../assets/js/vars');
 
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(serviceAccount),
@@ -12,22 +11,27 @@ firebaseAdmin.initializeApp({
 
 const db = firebaseAdmin.database()
 
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200
+}
+
 const router = Router()
 
 router.get('/', (req, res) => {
   res.send('Aqui no hay nada que ver señores, esto es el backend >:c')
 })
 
-router.get(`/${vars.register}`, (req, res) => {
+/* router.get(`/${vars.register}`, (req, res) => {
   res.render('index', {postAnswers: vars.postAnswers, postQuestions: vars.postQuestions})
-})
-
-router.get('/api/questions', (req, res) => {
+}) */
+/* 
+router.get('/api/questions', cors(corsOptions), (req, res) => {
   res.redirect(`/api/${vars.getQuestions}`)
-})
+}) */
 
 // Questions
-router.get(`/api/${vars.getQuestions}`, (req, res) => {
+router.get(`/api/${vars.getQuestions}`, cors(corsOptions), (req, res) => {
   // Hacer referencia a la colección de preguntas, y tomar un snapshot
   db.ref(vars.getQuestions).once('value', snapshot => {
     // Obtener toda la data del snapshot
@@ -43,16 +47,16 @@ router.get(`/api/${vars.getQuestions}`, (req, res) => {
       options: data[randomQuestionId]['options'],
       joke: data[randomQuestionId]['joke']
     }
-    res.send(response)
+    res.json(response)
   })
 })
 
-router.get('/api/answers/:id', (req, res) => {
+/* router.get('/api/answers/:id', (req, res) => {
   res.redirect(`/api/${vars.getAnswers}/${req.params.id}`)
-})
+}) */
 
 // Answers
-router.get(`/api/${vars.getAnswers}/:id`, (req, res) => {
+router.get(`/api/${vars.getAnswers}/:id`, cors(corsOptions) ,(req, res) => {
   // Hacer referencia a la colección de respuestas, y tomar un snapshot
   db.ref(vars.getAnswers).once('value', snapshot => {
     // Obtener toda la data del snapshot
@@ -66,18 +70,18 @@ router.get(`/api/${vars.getAnswers}/:id`, (req, res) => {
       answerId: answerRequired,
       answer: data[answerRequired]
     }
-    res.send(response)
+    res.json(response)
   })
 })
 
 // Post para subir preguntas
-router.post(`/${vars.postAnswers}`, (req, res) => {
+/* router.post(`/${vars.postAnswers}`, (req, res) => {
   res.send('Subir respuesta')
-})
+}) */
 
 // Post para subir respuestas
-router.post(`/${vars.postQuestions}`, (req, res) => {
+/* router.post(`/${vars.postQuestions}`, (req, res) => {
   res.send('Subir pregunta')
-})
+}) */
 
 module.exports = router
